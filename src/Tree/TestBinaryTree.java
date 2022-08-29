@@ -206,8 +206,41 @@ public class TestBinaryTree {
      * @return
      */
     public boolean isSymmetric(TreeNode root) {
-
+        if (root == null) return true;
+        return isSymmetricHelper(root.left,root.right);
     }
+
+    private boolean isSymmetricHelper(TreeNode left, TreeNode right) {
+        if (left == null && right == null) return true;
+        if (left == null || right == null || left.val != right.val) return false;
+        return isSymmetricHelper(left.left,right.right) && isSymmetricHelper(left.right,right.left);
+    }
+
+    /**
+     * 判断是否存在根结点到叶子节点的目标总和
+     * @param root
+     * @param targetSum
+     * @return
+     */
+    public static boolean hasPathSum(TreeNode root, int targetSum) {
+        if (root == null) return false;
+        if (root.left == null && root.right == null && root.val == targetSum) {
+            return true;
+        }
+        TreeNode left = root.left;
+        if (root.left != null) {
+            left.val  += root.val;
+        }
+        TreeNode right = root.right;
+        if (root.right != null) {
+            right.val += root.val;
+        }
+        return hasPathSum(left,targetSum) || hasPathSum(right,targetSum);
+    }
+
+
+
+
 
 
 
@@ -218,8 +251,7 @@ public class TestBinaryTree {
     public static void main(String[] args) {
         TreeNode root = new TreeNode(1);
         root.right = new TreeNode(2);
-        root.right.left = new TreeNode(3);
-        System.out.println( postorderTraversalIterate(root));
+        System.out.println( hasPathSum(root,1));
     }
 
 
