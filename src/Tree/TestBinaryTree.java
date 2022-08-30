@@ -238,6 +238,58 @@ public class TestBinaryTree {
         return hasPathSum(left,targetSum) || hasPathSum(right,targetSum);
     }
 
+    /**
+     * 给定两个数组 inorder 和 postorder
+     * inorder 是中序遍历
+     * postorder 是 同一棵树的后序遍历
+     * 构造并返回这棵二叉树
+     * @param inorder
+     * @param postorder
+     * @return
+     */
+    public TreeNode buildTree(int[] inorder, int[] postorder) {
+        int len = inorder.length;
+        if (len == 0) return null;
+
+        return dfs(inorder, postorder, 0 , len -1 , 0 , len -1 );
+    }
+
+    TreeNode dfs(int[] inorder, int[] postorder, int head1, int tail1, int head2, int tail2) {
+        if (head2 > tail2 ) return null;
+
+        int val = postorder[tail2];
+        TreeNode root = new TreeNode(val);
+        if (head2 == tail2) return root;
+
+        int mid = 0;
+        while (inorder[head1+mid] != val) mid++;
+
+        root.left = dfs(inorder,postorder,head1, head1 + mid -1 , head2, head2 + mid - 1);
+        root.right = dfs(inorder, postorder, head1 + mid + 1, tail1, head2 + mid, tail2 -1 );
+
+        return root;
+    }
+
+
+    public TreeNode buildPreTree(int[] preorder, int[] inorder) {
+        int len = inorder.length;
+        if (len == 0) return null;
+
+
+    }
+
+    private TreeNode dfsPre(int[] preorder, int[] inorder, int head1, int tail1, int head2, int tail2) {
+
+        if (head1 > tail1) return null;
+        int val = preorder[head1];
+        TreeNode root = new TreeNode(val);
+        if (head1 == tail1) return root;
+
+        int mid = 0;
+        while(inorder[head2 + mid] != val) mid++;
+
+        root.left = dfsPre(preorder,inorder,head1+1,head1+mid+1, head2,)
+    }
 
 
 
