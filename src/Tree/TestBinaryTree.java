@@ -271,25 +271,6 @@ public class TestBinaryTree {
     }
 
 
-    public TreeNode buildPreTree(int[] preorder, int[] inorder) {
-        int len = inorder.length;
-        if (len == 0) return null;
-
-
-    }
-
-    private TreeNode dfsPre(int[] preorder, int[] inorder, int head1, int tail1, int head2, int tail2) {
-
-        if (head1 > tail1) return null;
-        int val = preorder[head1];
-        TreeNode root = new TreeNode(val);
-        if (head1 == tail1) return root;
-
-        int mid = 0;
-        while(inorder[head2 + mid] != val) mid++;
-
-        root.left = dfsPre(preorder,inorder,head1+1,head1+mid+1, head2,)
-    }
 
 
 
