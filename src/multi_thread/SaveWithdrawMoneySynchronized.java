@@ -13,6 +13,10 @@ public class SaveWithdrawMoneySynchronized {
         Thread withdraw2 = new Thread(() -> myBank.withdrawMoney(300),"XiaoLe");
 
         withdraw1.start();
+        /**
+         * 不需要直接调用run函数
+         * 会引起main线程运行次
+         */
         //withdraw1.run();
 
         withdraw2.start();
