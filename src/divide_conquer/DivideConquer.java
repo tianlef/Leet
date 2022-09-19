@@ -1,12 +1,14 @@
 package divide_conquer;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * 分治算法LeetCode
  * 1. Pow(x,n)
  * 2. 剑指offer 51 数组中的逆序对
- * 3. 计算右侧小于当前元素的个数
+ * 3. 计算右侧小于当前元素的个数(返回数组)
  */
 public class DivideConquer {
 
@@ -97,6 +99,38 @@ public class DivideConquer {
             }
         }
         return count;
+    }
+
+
+    public List<Integer> countSmaller(int[] nums) {
+        int len = nums.length;
+        List<Integer> res = new ArrayList<>();
+        int[] temple = new int[len];
+        int[] copy = new int[len];
+        for (int i = 0; i < len; i++) {
+            copy[i] = nums[i];
+        }
+        countSmaller(0,len-1,copy,temple);
+        return res;
+    }
+
+    private void countSmaller(int left, int right, int[] copy, int[] temple) {
+        if (left == right) {
+            return;
+        }
+        int mid = left + (right - left) / 2;
+        countSmaller(left,mid,copy,temple);
+        countSmaller(mid+1,right,copy,temple);
+        if (copy[mid] <= copy[mid+1]) {
+            return;
+        }
+        merge(left,mid,right,copy,temple);
+    }
+
+    private void merge(int left, int mid, int right,int[] copy, int[] temple) {
+        for (int i = left;i<=right;i++) {
+
+        }
     }
 
     public static void main(String[] args) {
