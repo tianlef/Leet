@@ -13,10 +13,10 @@ public class SaveWithdrawMoneySynchronized {
         Thread withdraw2 = new Thread(() -> myBank.withdrawMoney(300),"XiaoLe");
 
         withdraw1.start();
-        withdraw1.run();
+        //withdraw1.run();
 
         withdraw2.start();
-        withdraw2.run();
+        //withdraw2.run();
 
 
 
