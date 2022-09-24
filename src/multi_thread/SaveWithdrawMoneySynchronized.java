@@ -14,8 +14,10 @@ public class SaveWithdrawMoneySynchronized {
 
         withdraw1.start();
         /**
-         * 不需要直接调用run函数
-         * 会引起main线程运行次
+         *
+         * 只有start方法可以启动一个线程，run方法不能启动一个线程
+         * start方法可以不执行完run方法就执行下面的方法，run方法不行
+         * start执行了多线程，run不可以
          */
         //withdraw1.run();
 
