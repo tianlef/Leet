@@ -1,5 +1,7 @@
 package multi_thread;
 
+import java.util.concurrent.Executor;
+
 public class SaveWithdrawMoneySynchronized {
 
     public static void main(String[] args) {
@@ -23,6 +25,8 @@ public class SaveWithdrawMoneySynchronized {
 
         withdraw2.start();
         //withdraw2.run();
+
+
 
 
 

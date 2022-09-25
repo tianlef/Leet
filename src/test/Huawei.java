@@ -75,6 +75,40 @@ public class Huawei {
         return res;
     }
 
+    /**
+     * 明明的随机数
+     */
+    public static void rondomNumbers() {
+        Scanner scanner = new Scanner(System.in);
+        while(scanner.hasNext()) {
+            int n = scanner.nextInt();
+            List<Integer> list = new ArrayList<>();
+            for (int i = 0; i < n ; i++) {
+                list.add(scanner.nextInt());
+            }
+            Collections.sort(list);
+            HashSet<Integer> set = new HashSet<>();
+            for (Integer i: list) {
+                if (!set.contains(i)){
+                    set.add(i);
+                    System.out.println(i);
+                }
+            }
+        }
+    }
+
+
+    public int characterStatistic() {
+        Scanner scanner = new Scanner(System.in);
+        String s = scanner.nextLine();
+        HashSet<Character> characters = new HashSet<>();
+        for (int i = 0 ; i < s.length(); i++) {
+            Character c = s.charAt(i);
+            characters.add(c);
+        }
+        return characters.size();
+    }
+
 
 
      /**
