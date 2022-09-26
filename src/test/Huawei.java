@@ -98,6 +98,10 @@ public class Huawei {
     }
 
 
+    /**
+     * 不同字符串数量
+     * @return
+     */
     public int characterStatistic() {
         Scanner scanner = new Scanner(System.in);
         String s = scanner.nextLine();
@@ -109,6 +113,75 @@ public class Huawei {
         return characters.size();
     }
 
+    /**
+     * 青蛙跳台阶问题
+     * 一只青蛙一次可以跳上一个台阶，或者两个台阶
+     * 问跳到第N个台阶有几种跳法
+     * @param number
+     * @return
+     */
+    public static int jumpFloor (int number) {
+        //用于记录每个台阶有几种跳法
+        int[] record = new int[41];
+        record[1] = 1;
+        record[2] = 2;
+        for (int i = 3; i <= number; i++) {
+            record[i] = record[i-1] + record[i-2];
+        }
+        return record[number];
+    }
+
+    /**
+     * 解析字符指令
+     * 按字符移动
+     */
+    public static void moveByString() {
+        Scanner scanner = new Scanner(System.in);
+        String line = scanner.nextLine();
+        String[] split = line.split(";");
+        int x = 0 ,y = 0;
+        for (String s: split) {
+            /**
+             * 长度判断
+             */
+            if (s.length() > 3 || s.length() <= 1) {
+                continue;
+            }
+            /**
+             * 判断后面是否都为数字
+             */
+            boolean flag = true;
+            for (int i = 1; i < s.length(); i++) {
+                Character c = s.charAt(i);
+                if (!Character.isDigit(c)) {
+                    flag = false;
+                }
+            }
+            if (!flag) {
+                continue;
+            }
+            /**
+             * 初始字符判断
+             */
+            Character first = s.charAt(0);
+            int num = Integer.parseInt(s.substring(1));
+            if (first == 'A') {
+                x -= num;
+            }
+            else if (first == 'S') {
+                y -= num;
+            }
+            else if (first == 'W') {
+                y += num;
+            }
+            else if (first == 'D') {
+                x += num;
+            }
+        }
+        System.out.println(x+","+y);
+    }
+
+
 
 
      /**
@@ -116,18 +189,8 @@ public class Huawei {
      * @param args
      */
     public static void main(String[] args) {
-        /*
-        Scanner scanner = new Scanner(System.in);
-        while(scanner.hasNextLine()){
-            String s = scanner.nextLine();
-            System.out.println(transfer(s));
-        }
-         */
-         ArrayList<Integer> input = new ArrayList<>(Arrays.asList(3,2,4));
-         System.out.println(twoSum(input,6));
-
-
-
+        System.out.println(jumpFloor(3));
+        moveByString();
 
     }
 
