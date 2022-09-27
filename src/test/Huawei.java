@@ -182,6 +182,40 @@ public class Huawei {
     }
 
 
+    public void removeString() {
+        Scanner scanner = new Scanner(System.in);
+        String str = scanner.nextLine();
+        HashMap<Character,Integer> map = new HashMap();
+        for (int i = 0; i < str.length(); i++) {
+            Character c = str.charAt(i);
+            if (map.containsKey(c)) {
+                map.put(c,map.get(c) + 1);
+            }
+            else {
+                map.put(c,1);
+            }
+        }
+        int min = 100;
+        for (Integer num: map.values()) {
+            if (min > num) {
+                min = num;
+            }
+        }
+        HashSet<Character> set = new HashSet<>();
+        for (Map.Entry<Character,Integer> entry : map.entrySet()) {
+            if (entry.getValue() == min) {
+                set.add(entry.getKey());
+            }
+        }
+        for (int i = 0 ; i < str.length(); i++) {
+            Character c = str.charAt(i);
+            if (!set.contains(c)) {
+                System.out.print(c);
+            }
+        }
+    }
+
+
 
 
      /**
