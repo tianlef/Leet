@@ -1,5 +1,7 @@
 package test;
 
+import com.sun.security.auth.SolarisPrincipal;
+
 import java.util.*;
 
 public class Huawei {
@@ -182,6 +184,9 @@ public class Huawei {
     }
 
 
+    /**
+     * 删除出现次数最少的字符串
+     */
     public void removeString() {
         Scanner scanner = new Scanner(System.in);
         String str = scanner.nextLine();
@@ -216,6 +221,54 @@ public class Huawei {
     }
 
 
+    /**
+     * ip和十进制之间的转换
+     */
+    public static void IpNum() {
+        Scanner scanner = new Scanner(System.in);
+        while(scanner.hasNext()) {
+            String line = scanner.nextLine();
+            if (line.contains(".")) {
+                System.out.println(ip2num(line));
+            }
+            else {
+                System.out.println(num2ip(line));
+            }
+        }
+    }
+
+    private static Long ip2num(String line) {
+        String[] split = line.split("\\.");
+        StringBuilder stringBuilder = new StringBuilder();
+        for (String str : split) {
+            int num = Integer.parseInt(str);
+            String num2 = Integer.toBinaryString(num);
+            while (num2.length() < 8) {
+                num2 = "0" + num2;
+            }
+            stringBuilder.append(num2);
+        }
+        return Long.parseLong(stringBuilder.toString(),2);
+    }
+
+    private static String num2ip(String line) {
+        Long num = Long.parseLong(line);
+        String num2 = Long.toBinaryString(num);
+        while(num2.length() < 32) {
+            num2 = "0" + num2;
+        }
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0 ; i <= 24; i = i + 8){
+            String sub = num2.substring(i , i+8);
+            int num3 = Integer.parseInt(sub,2);
+            stringBuilder.append(num3);
+            if (i != 24) {
+                stringBuilder.append(".");
+            }
+        }
+        return stringBuilder.toString();
+    }
+
 
 
      /**
@@ -223,9 +276,7 @@ public class Huawei {
      * @param args
      */
     public static void main(String[] args) {
-        System.out.println(jumpFloor(3));
-        moveByString();
-
+        IpNum();
     }
 
 
