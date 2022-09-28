@@ -2,6 +2,7 @@ package test;
 
 import com.sun.security.auth.SolarisPrincipal;
 
+import javax.xml.bind.annotation.XmlInlineBinaryData;
 import java.util.*;
 
 public class Huawei {
@@ -269,6 +270,107 @@ public class Huawei {
         return stringBuilder.toString();
     }
 
+    /**
+     * 字符串排序
+     */
+    public static void sortString(){
+        Scanner scanner = new Scanner(System.in);
+        int num = Integer.parseInt(scanner.nextLine());
+        String[] strings = new String[num];
+        for (int i = 0 ; i < num; i++) {
+            strings[i] = scanner.nextLine();
+        }
+        //selectSort(strings);
+        //bubbleSort(strings);
+        insertionSort(strings);
+        for (String s: strings) {
+            System.out.println(s);
+        }
+    }
+
+
+    /**
+     * 冒泡排序
+     * @param strings
+     */
+    private static void bubbleSort(String[] strings) {
+        for (int i = strings.length - 1; i > 0; i--) {
+            boolean hasSwap = false;
+            for (int j = 0; j < i; j++) {
+                if (compareString(strings[j],strings[j+1])) {
+                    String temp = strings[j];
+                    strings[j] = strings[j+1];
+                    strings[j+1] = temp;
+                    hasSwap = true;
+                }
+            }
+            if (hasSwap == false) {
+                break;
+            }
+        }
+    }
+
+    /**
+     * 选择排序
+     * @param strings
+     */
+    private static void selectSort(String[] strings) {
+        for (int i = 0 ; i < strings.length; i++) {
+            String min = strings[i];
+            int changeIndex = i;
+            for (int j = i + 1; j < strings.length; j++) {
+                String s2 = strings[j];
+                if (compareString(min,s2)) {
+                    min = s2;
+                    changeIndex = j;
+                }
+            }
+            if (!min.equals(strings[i])) {
+                String temp = strings[i];
+                strings[i] = min;
+                strings[changeIndex] = temp;
+            }
+
+        }
+    }
+
+    /**
+     * 插入排序
+     * @param strings
+     */
+    private static void insertionSort(String[] strings) {
+        for(int i = 1; i < strings.length; i++) {
+            String current = strings[i];
+            int position = i;
+            for (int j = 0; j <= i; j++) {
+                if (compareString(strings[j],current)) {
+                    position = j;
+                    break;
+                }
+            }
+            for (int j = i ; j > position; j--) {
+                strings[j] = strings[j-1];
+            }
+            strings[position] = current;
+        }
+    }
+
+
+    private static boolean compareString(String s1, String s2) {
+        int minLength = Math.min(s1.length(),s2.length());
+        for (int i = 0; i < minLength; i++) {
+            Character c1 = s1.charAt(i);
+            Character c2 = s2.charAt(i);
+            if (c1 < c2) {
+                return false;
+            }
+            else if (c1 > c2) {
+                return true;
+            }
+        }
+        return s1.length() > s2.length() ? true : false;
+    }
+
 
     public static void reverseString() {
         Scanner scanner = new Scanner(System.in);
@@ -287,7 +389,7 @@ public class Huawei {
      * @param args
      */
     public static void main(String[] args) {
-        IpNum();
+        sortString();
     }
 
 
