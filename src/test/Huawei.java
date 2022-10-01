@@ -282,7 +282,8 @@ public class Huawei {
         }
         //selectSort(strings);
         //bubbleSort(strings);
-        insertionSort(strings);
+        //insertionSort(strings);
+        mergeSort(strings);
         for (String s: strings) {
             System.out.println(s);
         }
@@ -354,6 +355,76 @@ public class Huawei {
             strings[position] = current;
         }
     }
+
+
+    private static  void mergeSort(String[] strings) {
+        mergeSort(strings,0,strings.length-1);
+    }
+
+    private static void mergeSort(String[] strings, int l, int r) {
+        //中止条件
+        if (l >= r) {
+            return;
+        }
+        //划分区间
+        int mid = l + (r - l)/2;
+        //递归
+        mergeSort(strings,l,mid);
+        mergeSort(strings,mid+1, r);
+        //将上一次的结果保存进辅助数组
+        String[] tmp = new String[r-l+1];
+        for (int k = l; k <= r; k++) {
+            tmp[k-l] = strings[k];
+        }
+        int i = 0, j = (r-l)/2+1;
+        for (int k = l; k<=r; k++){
+            if (i > (r-l)/2) {
+                strings[k] = tmp[j];
+                j++;
+            }
+            else if(j > r-l || compareString(tmp[j],tmp[i])) {
+                strings[k] = tmp[i];
+                i++;
+            }
+            else{
+                strings[k] = tmp[j];
+                j++;
+            }
+        }
+
+    }
+
+
+    private void quickSort(String[] strings) {
+        quickSort(strings,0,strings.length-1);
+    }
+
+    private void quickSort(String[] strings, int l, int r) {
+        //终止条件
+        if(l>=r) {
+            return;
+        }
+        //划分区间
+        int i = partition(strings,l,r);
+        quickSort(strings,l,i-1);
+        quickSort(strings,i+1,r);
+    }
+
+    private int partition(String[] strings, int l, int r) {
+        int i = l, j = r;
+        while(i<j) {
+            while(i<j && compareString(strings[j],strings[l])) j--;
+            while(i<j && compareString(strings[l],strings[i])) i++;
+            String temp = strings[i];
+            strings[i] = strings[j];
+            strings[j] = temp;
+        }
+        String temp = strings[i];
+        strings[i] = strings[l];
+        strings[l] = temp;
+        return i;
+    }
+
 
 
     private static boolean compareString(String s1, String s2) {
