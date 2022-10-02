@@ -1,11 +1,29 @@
 package test;
 
-import com.sun.security.auth.SolarisPrincipal;
-
-import javax.xml.bind.annotation.XmlInlineBinaryData;
 import java.util.*;
 
 public class Huawei {
+
+    class Student {
+        private String name;
+        private int grade;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public int getGrade() {
+            return grade;
+        }
+
+        public void setGrade(int grade) {
+            this.grade = grade;
+        }
+    }
 
     static final HashMap<Character,Integer> dict = new HashMap<>(
     );
@@ -452,6 +470,20 @@ public class Huawei {
         }
         System.out.println(stringBuilder.toString());
     }
+
+    /**
+     * HJ68
+     * 成绩排序
+     */
+    public void gradeSort() {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int sortFlag = scanner.nextInt();
+        for (int i = 0; i < n; i++) {
+
+        }
+    }
+
 
 
 
