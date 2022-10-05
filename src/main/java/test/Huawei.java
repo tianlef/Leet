@@ -1,29 +1,11 @@
 package test;
 
+import lombok.Data;
+
 import java.util.*;
 
+
 public class Huawei {
-
-    class Student {
-        private String name;
-        private int grade;
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public int getGrade() {
-            return grade;
-        }
-
-        public void setGrade(int grade) {
-            this.grade = grade;
-        }
-    }
 
     static final HashMap<Character,Integer> dict = new HashMap<>(
     );
@@ -474,14 +456,32 @@ public class Huawei {
     /**
      * HJ68
      * 成绩排序
+     * 成绩和姓名同时排序
      */
     public void gradeSort() {
         Scanner scanner = new Scanner(System.in);
-        int n = scanner.nextInt();
-        int sortFlag = scanner.nextInt();
+        int n = Integer.parseInt(scanner.nextLine());
+        int ascendingOrder = Integer.parseInt(scanner.nextLine());
+        HashMap<Integer,String> map = new HashMap<>();
+        int[][] score = new int[n][2];
         for (int i = 0; i < n; i++) {
-
+            String[] nameAndScore = scanner.nextLine().split("\\s+");
+            score[i][0] = i;
+            score[i][1] = Integer.parseInt(nameAndScore[1]);
+            map.put(i,nameAndScore[0]);
         }
+        Arrays.sort(score,(o1,o2) -> {
+            if (ascendingOrder == 0) {
+                return o2[1] - o1[1];
+            }
+            else{
+                return o1[1] - o2[1];
+            }
+        });
+        for(int i = 0; i < n; i++) {
+            System.out.println(map.get(score[i][0])+ " " + score[i][1]);
+        }
+
     }
 
 
