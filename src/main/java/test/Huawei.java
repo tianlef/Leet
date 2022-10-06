@@ -1,5 +1,6 @@
 package test;
 
+import Tree.TreeNode;
 import lombok.Data;
 
 import java.util.*;
@@ -481,18 +482,118 @@ public class Huawei {
         for(int i = 0; i < n; i++) {
             System.out.println(map.get(score[i][0])+ " " + score[i][1]);
         }
+    }
 
+    /**
+     * LeetCode
+     * 括号的最大嵌套深度
+     * Leetcode 1614
+     */
+    public static int maxDepth(String s) {
+        List<Integer> record = new ArrayList<>();
+        int currentDepth = 0;
+        Stack<Character> stack = new Stack<>();
+        for (int i = 0; i < s.length(); i++) {
+            Character c = s.charAt(i);
+            if (c == '(') {
+                if (currentDepth > 0) {
+                    record.add(stack.size()+currentDepth);
+                    currentDepth = 0;
+                }
+                stack.push('(');
+            } else if (c == ')') {
+                if (!stack.isEmpty()) {
+                    stack.pop();
+                    currentDepth++;
+                }
+                else{
+                    return -1;
+                }
+            }
+        }
+        record.add(currentDepth);
+        return Collections.max(record);
+
+    }
+
+    /**
+     * LeetCode 有重复字符串的排列组合
+     * @param s
+     * @return
+     */
+    public String[] permutation(String s) {
+        return null;
+    }
+
+    /**
+     * LeetCode 最长连续递增序列
+     * @param nums
+     * @return
+     */
+    public static int findLengthOfLCIS(int[] nums) {
+        List<Integer> record = new ArrayList<>();
+        int currentLength = 0;
+        int currentNum = Integer.MIN_VALUE;
+        for(int i = 0; i < nums.length; i++) {
+            if (currentNum < nums[i]) {
+                currentLength++;
+                currentNum = nums[i];
+            }
+            else{
+                record.add(currentLength);
+                currentNum = nums[i];
+                currentLength = 1;
+            }
+        }
+        record.add(currentLength);
+        return Collections.max(record);
+    }
+
+
+    /**
+     *
+     * Deque 和 Stack 的 区别
+     *
+     * Stack继承了Vector
+     * Deque继承了Queue
+     *
+     * 官方更支持使用Deque
+     *
+     * 剑指Offer 32 从上到下打印二叉树
+     * @param root
+     * @return
+     */
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        Deque<TreeNode> queue = new LinkedList<>();
+        if (root == null) {
+            return new ArrayList<>();
+        }
+        List<List<Integer>> res = new ArrayList<>();
+        queue.add(root);
+        while(!queue.isEmpty()) {
+            int n = queue.size();
+            List<Integer> subRes = new ArrayList<>();
+            for (int i = 0; i < n;i++) {
+                TreeNode current = queue.remove();
+                subRes.add(current.getVal());
+                if (current.getLeft() != null) queue.add(current.getLeft());
+                if(current.getRight() != null) queue.add(current.getRight());
+            }
+            res.add(subRes);
+        }
+        return res;
     }
 
 
 
 
-     /**
+
+    /**
      * 输入练习
      * @param args
      */
     public static void main(String[] args) {
-        sortString();
+        System.out.println(findLengthOfLCIS(new int[]{2,1,3}));
     }
 
 
