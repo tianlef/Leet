@@ -1,7 +1,6 @@
-package test;
+package Leet;
 
 import Tree.TreeNode;
-import lombok.Data;
 
 import java.util.*;
 

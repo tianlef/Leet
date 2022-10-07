@@ -1,4 +1,4 @@
-package test;
+package Leet;
 
 public class Interval {
 
