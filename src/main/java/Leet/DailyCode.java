@@ -32,6 +32,17 @@ public class DailyCode {
         return Collections.max(sumRecord);
     }
 
+    /**
+     * LeetCode 优势洗牌
+     * 10。8
+     * @param nums1
+     * @param nums2
+     * @return
+     */
+    public int[] advantageCount(int[] nums1, int[] nums2) {
+        return new int[1];
+    }
+
     public static void main(String[] args) {
 
     }
