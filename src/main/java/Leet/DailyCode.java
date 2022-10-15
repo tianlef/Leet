@@ -35,45 +35,26 @@ public class DailyCode {
     /**
      * LeetCode 优势洗牌
      * 10。8
+     * 思路一 查找最有数组 超时
+     * 思路二 贪心算法
      * @param nums1
      * @param nums2
      * @return
      */
     public static int[] advantageCount(int[] nums1, int[] nums2) {
-        Arrays.sort(nums1);
-        int[] record = new int[nums1.length];
-        int index = 0;
-        HashSet<Integer> set = new HashSet<>();
-        Deque<Integer> valSet = new LinkedList<>();
-        for (int i = 0; i < nums1.length ; i++) {
-            int min = Integer.MAX_VALUE;
-            int currentIndex = i;
-            boolean findIt = false;
-            for (int j = index; j < nums2.length; j++) {
-                if (set.contains(j)) {
-                    continue;
-                }
-                int different = nums1[i] - nums2[j];
-                if (different < min && different > 0 ) {
-                    min = different;
-                    currentIndex = j;
-                    findIt = true;
-                }
-            }
-            if (findIt) {
-                set.add(currentIndex);
-                record[currentIndex] = nums1[i];
-            }
-            else{
-                valSet.add(nums1[i]);
-            }
+        int n = nums1.length;
+        Integer[] idx1 = new Integer[n];
+        Integer[] idx2 = new Integer[n];
+        for (int i = 0 ; i < n; i++) {
+            idx1[i] = i;
+            idx2[i] = i;
         }
-        for (int i = 0 ; i < nums1.length;i++) {
-            if (!set.contains(i)) {
-                record[i] = valSet.poll();
-            }
-        }
-        return record;
+        Arrays.sort(idx1,(i,j)-> nums1[i] - nums1[j]);
+        Arrays.sort(idx2,(i,j) -> nums2[i] - nums2[j]);
+
+        int[] ans = new int[n];
+        int left = 0, right = n - 1;
+        return new int[0];
     }
 
 
@@ -110,6 +91,8 @@ public class DailyCode {
         }
         System.out.println(max);
     }
+
+
 
     public static void main(String[] args) {
         int[] h = advantageCount(new int[]{12,24,8,32},new int[]{13,25,32,11});
