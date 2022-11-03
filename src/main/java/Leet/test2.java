@@ -66,7 +66,6 @@ public class test2 {
         for(Character c : characters) {
             System.out.print(c);
         }
-
     }
 
 
