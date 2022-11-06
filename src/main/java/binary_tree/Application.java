@@ -3,13 +3,11 @@ package binary_tree;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Application {
     public static void main(String[] args) {
+        Deque<Integer> queue = new LinkedList<>();
         Scanner scanner = new Scanner(System.in);
         String fileName = scanner.nextLine();
         HashSet<String> set = new HashSet<>();
